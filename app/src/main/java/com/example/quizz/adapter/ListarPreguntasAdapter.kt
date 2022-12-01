@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizz.R
 
-class ListarPreguntasAdapter( private val onClickListener: (String) -> Unit) : RecyclerView.Adapter<ListarPreguntasViewHolder>() {
+class ListarPreguntasAdapter( private val onClickListener: (Int) -> Unit) : RecyclerView.Adapter<ListarPreguntasViewHolder>() {
 
     lateinit var context: Context
     lateinit var cursor: Cursor
@@ -24,7 +24,7 @@ class ListarPreguntasAdapter( private val onClickListener: (String) -> Unit) : R
 
     override fun onBindViewHolder(holder: ListarPreguntasViewHolder, position: Int) {
         cursor.moveToPosition(position)
-        holder. render(cursor.getInt(0),cursor.getString(1), onClickListener/* onClickDelete*/)
+        holder. render(cursor.getInt(0),cursor.getString(1),  onClickListener/* onClickDelete*/)
     }
 
     override fun getItemCount(): Int {

@@ -7,21 +7,25 @@ import android.view.View
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.quizz.adapter.ListarPreguntasAdapter
+import com.example.quizz.databinding.RecyclerBinding
 
 class ListarPreguntas : AppCompatActivity() {
 
 
     private lateinit var preguntas: ListarPreguntasProvider
     private lateinit var adapter: ListarPreguntasAdapter
+    private lateinit var binding: RecyclerBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.recycler)
+        binding=RecyclerBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         preguntas = ListarPreguntasProvider(this, null)
         initRecyclerView()
     }
 
     fun initRecyclerView(){
-        val recyclerView= findViewById<RecyclerView>(R.id.recyclerView)
+        val recyclerView= binding.recyclerView
 
         recyclerView.layoutManager= LinearLayoutManager(this)
 
@@ -39,7 +43,7 @@ class ListarPreguntas : AppCompatActivity() {
         startActivity(intent)
     }
 
-    fun dameID(pos: String)
+    fun dameID(pos: Int)
     {
         intent = Intent(this, MostrarPregunta::class.java).apply {
             putExtra("id", pos)

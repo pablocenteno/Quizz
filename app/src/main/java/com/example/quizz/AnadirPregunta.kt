@@ -5,16 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.EditText
+import com.example.quizz.databinding.ActivityAnadirPreguntaBinding
 
 class AnadirPregunta : AppCompatActivity() {
 
     lateinit var preguntilla: EditText
+    private lateinit var binding: ActivityAnadirPreguntaBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anadir_pregunta)
+        binding= ActivityAnadirPreguntaBinding.inflate(layoutInflater)
+        setContentView(binding.root)
 
-        preguntilla= findViewById<EditText>(R.id.introPregunta)
+        preguntilla= binding.introPregunta
     }
 
     fun siguiente(view: View){
@@ -24,5 +27,9 @@ class AnadirPregunta : AppCompatActivity() {
         }
 
         startActivity(intent)
+    }
+
+    fun borrar(view: View){
+        preguntilla.setText("")
     }
 }

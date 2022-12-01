@@ -2,6 +2,7 @@ package com.example.quizz
 
 import android.content.ContentValues
 import android.content.Context
+import android.content.Intent
 import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteException
@@ -83,12 +84,11 @@ class ListarPreguntasProvider(contex: Context, factory: SQLiteDatabase.CursorFac
         return cursor
     }
 
-    fun obtenerPregunta(id: String):Cursor
+    fun obtenerPregunta(id: Int):Cursor
     {
-        val num = Integer.parseInt(id)
 
         val db= this.readableDatabase
-        var cursor = db.rawQuery("SELECT * FROM ${ListarPreguntasProvider.TABLA_PREGUNTAS} WHERE $COLUMNA_ID= $num", null)
+        var cursor = db.rawQuery("SELECT * FROM ${ListarPreguntasProvider.TABLA_PREGUNTAS} WHERE $COLUMNA_ID= $id", null)
 
         cursor.moveToFirst()
 

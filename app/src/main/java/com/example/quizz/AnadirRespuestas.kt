@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
+import com.example.quizz.databinding.ActivityAnadirRespuestasBinding
 
 class AnadirRespuestas : AppCompatActivity() {
 
@@ -16,15 +17,20 @@ class AnadirRespuestas : AppCompatActivity() {
     lateinit var resp3: EditText
     lateinit var resp4: EditText
 
+//    private lateinit var binding: ac
+        private  lateinit var binding: ActivityAnadirRespuestasBinding
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_anadir_respuestas)
+
+        binding = ActivityAnadirRespuestasBinding.inflate(layoutInflater)
+        setContentView(binding.root)
         pregunta= intent.getStringExtra("pregunta").toString()
 
-        resp1 = findViewById<EditText>(R.id.respuesta1)
-        resp2 = findViewById<EditText>(R.id.respuesta2)
-        resp3 = findViewById<EditText>(R.id.respuesta3)
-        resp4 = findViewById<EditText>(R.id.respuesta4)
+        resp1 = binding.respuesta1
+        resp2 = binding.respuesta2
+        resp3 = binding.respuesta3
+        resp4 = binding.respuesta4
 
 
     }
@@ -39,10 +45,31 @@ class AnadirRespuestas : AppCompatActivity() {
 
         else{
             var tabla = ListarPreguntasProvider(this, null)
-            tabla.crearPregunta(pregunta, resp1.toString(), resp2.toString(),resp3.toString(), resp4.toString())
-
+            val lista = mutableListOf<String>()
+            tabla.crearPregunta(pregunta, resp1.text.toString(), resp2.text.toString(),resp3.text.toString(), resp4.text.toString())
+            lista.add(pregunta)
+            lista.add(resp1.text.toString())
+            lista.add(resp2.text.toString())
+            lista.add(resp3.text.toString())
+            lista.add(resp4.text.toString())
             intent = Intent(this, ListarPreguntas::class.java)
             startActivity(intent)
         }
+    }
+
+    fun borrar1(view: View){
+        resp1.setText("")
+    }
+
+    fun borrar2(view: View){
+        resp2.setText("")
+    }
+
+    fun borrar3(view: View){
+        resp3.setText("")
+    }
+
+    fun borrar4(view: View){
+        resp4.setText("")
     }
 }
